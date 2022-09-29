@@ -8,7 +8,7 @@ const router = require('./routes/route')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-mongoose.connect("", {
+mongoose.connect("mongodb+srv://tamoghna_test:tamoghna17@test.uvbxgla.mongodb.net/group52Database", {
     useNewUrlParser: true
 })
     .then(() => console.log("MongoDB is Connected"))
@@ -17,5 +17,5 @@ mongoose.connect("", {
 app.use('/', router)
 
 app.listen(process.env.PORT || 3000, function () {
-    console.log("Express app running on port" + (process.env.PORT || 3000))
+    console.log("Express app running on port " + (process.env.PORT || 3000))
 })
