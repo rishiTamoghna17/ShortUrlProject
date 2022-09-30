@@ -59,7 +59,7 @@ const createShortUrl = async function (req, res) {
 
             let created = await UrlModel.create(create)
             let result = await UrlModel.findOne({ longUrl: longUrl }).select({ _id: 0, urlCode: 1, longUrl: 1, shortUrl: 1 })
-            return res.status(201).send({ status: true, message: "Success", data: result })
+            return res.status(201).send({ status: true, data: result })
         }
     } catch (error) {
         console.log(error)
