@@ -15,6 +15,12 @@ const isValidString = function (data) {
 const createShortUrl = async function (req, res) {
     try {
         let data = req.body
+        if (Object.keys(data).length == 0) {
+            return res.status(400).send({status: false, message: "Body cannot be empty"})
+        }
+        if (Object.keys(data).length > 1) {
+            return res.status(400).send({status: false, message: "Body can only have longUrl"})
+        }
         let { longUrl, urlCode, shortUrl } = data
         let create = {}
         if (!longUrl) {
@@ -41,13 +47,13 @@ const createShortUrl = async function (req, res) {
             if (!urlCode) {
                 urlCode = shortId.generate(longUrl)
                 urlCode = urlCode.trim().toLowerCase()
-                console.log(urlCode)
+                // console.log(urlCode)
                 create.urlCode = urlCode
             }
 
             if (!shortUrl) {
                 shortUrl = "http://localhost:" + (process.env.PORT || 3000) + `/${urlCode}`
-                console.log(shortUrl)
+                // console.log(shortUrl)
                 create.shortUrl = shortUrl
             }
 
